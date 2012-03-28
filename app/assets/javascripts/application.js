@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-twipsy
+//= require bootstrap-popover
+//= require bootstrap-modal
 //= require_tree .

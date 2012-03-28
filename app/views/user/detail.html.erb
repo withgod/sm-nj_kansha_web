@@ -1,8 +1,17 @@
 <h1>User#detail</h1>
-<a href="/user/index">user index</a>
 <h2>summary</h2>
 <dl>
-  <dt>your id</dt>
+  <dt>nickname</dt>
+  <dd>
+  <%=@user.last_nick%>
+  <a href="javascript:void(0)" rel="popover" title="other nicknames">alias</a>
+  <span style="display:none" id="nicknames">
+    <% @user.nicknames.each do|nick| %>
+      <%= nick.nickname%><br>
+    <% end %>
+  </span>
+  </dd>
+  <dt>steam id</dt>
   <dd><%=params[:id]%>/<%=@user[:steamid]%></dd>
   <dt>total jump challenge</dt>
   <dd><%= @user.results.size%></dd>
