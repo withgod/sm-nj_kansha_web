@@ -1,4 +1,6 @@
 SmNjKanshaWeb::Application.routes.draw do
+  get "map/index"
+
   get "class/show"
   match 'class/show/:id' => 'class#show'
 

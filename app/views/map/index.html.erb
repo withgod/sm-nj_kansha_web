@@ -1,0 +1,8 @@
+<h1>Map#index</h1>
+<h2>challenge count ranking</h2>
+<ul>
+  <% @maps.sort {|a, b| b.results.size  <=> a.results.size}.each do |map| %>
+    <li><%=map.results.size%> <%=map.mapname%></li>
+  <% end %>
+</ul>
+
