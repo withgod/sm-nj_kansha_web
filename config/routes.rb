@@ -1,4 +1,10 @@
 SmNjKanshaWeb::Application.routes.draw do
+  get "class/show"
+  match 'class/show/:id' => 'class#show'
+
+  get "user/index"
+  match 'user/:id' => 'user#detail'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

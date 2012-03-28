@@ -1,5 +1,5 @@
 # MySQL.  Versions 4.1 and 5.0 are recommended.
-# 
+#
 # Install the MYSQL driver
 #   gem install mysql2
 #
@@ -12,10 +12,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: sm-nj_kansha_web_development
+  database: sourcemod
   pool: 5
-  username: root
-  password:
+  username: sourcemod
+  password: sourcemodpassword
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -25,18 +25,18 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: sm-nj_kansha_web_test
+  database: sourcemod
   pool: 5
-  username: root
-  password:
+  username: sourcemod
+  password: sourcemodpassword
   socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: sm-nj_kansha_web_production
+  database: sourcemod
   pool: 5
-  username: root
-  password:
+  username: sourcemod
+  password: sourcemodpassword
   socket: /var/run/mysqld/mysqld.sock
