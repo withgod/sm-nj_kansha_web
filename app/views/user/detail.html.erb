@@ -1,0 +1,23 @@
+<h1>User#detail</h1>
+<h2>summary</h2>
+<dl>
+  <dt>your id</dt>
+  <dd><%=params[:id]%>/<%=@user[:steamid]%></dd>
+  <dt>total jump challenge</dt>
+  <dd><%= @user.results.size%></dd>
+  <dt>total jump count</dt>
+  <dd><%= @user.results.sum(:jump_count)%></dd>
+  <dt>average jump count per challenge</dt>
+  <dd><%= @user.average_count_per_jump%></dd>
+</dl>
+<h2>last activity</h2>
+<dl>
+  <dt>date</dt>
+  <dd><%= @user.results.last.created%></dd>
+  <dt>nickname</dt>
+  <dd><%= @user.last_nick%></dd>
+  <dt>map</dt>
+  <dd><%= @user.results.last.mapname%></dd>
+  <dt>jump count</dt>
+  <dd><%= @user.results.last.jump_count%></dd>
+</dl>

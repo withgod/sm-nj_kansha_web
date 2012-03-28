@@ -1,0 +1,10 @@
+<h1>User#index</h1>
+<h2> total jump ranking </h2>
+
+<ul>
+  <% @users.sort {|a, b| b.total_count<=>a.total_count}.each do|user| %>
+  <li>[<%= user.total_count%>] <a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a>
+  </li>
+<% end %>
+</ul>
+
