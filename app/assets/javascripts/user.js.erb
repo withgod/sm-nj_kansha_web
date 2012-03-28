@@ -1,0 +1,12 @@
+$(function(){
+  $("a[rel=popover]")
+  .popover({
+    offset: 10,
+    html: true,
+    content: $("#nicknames").html()
+  })
+  .click(function(e) {
+    e.preventDefault()
+  })
+});
+
