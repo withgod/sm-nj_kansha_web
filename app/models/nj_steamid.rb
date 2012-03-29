@@ -14,6 +14,9 @@ class NjSteamid < ActiveRecord::Base
   def total_count
     return self.results.sum(:jump_count)
   end
+  def total_challenge
+    return self.results.count(:id)
+  end
   def last_nick
     return self.nicknames.last.nickname
   end

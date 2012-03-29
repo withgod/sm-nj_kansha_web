@@ -1,21 +1,29 @@
 <h1>User#index</h1>
 <h2> total jump ranking </h2>
+total ranked user [<%=@ranking.total_count%>]
+<%= paginate @ranking %>
 <table>
   <tr>
-    <th>rank</th>
-    <th>total count</th>
-    <th>nickname</th>
-    <th>last map</th>
-    <th>last challenge</th>
+    <th rowspan="2">rank</th>
+    <th colspan="2">total count</th>
+    <th rowspan="2">nickname</th>
+    <th rowspan="2">last map</th>
+    <th rowspan="2">last challenge</th>
+  </tr>
+  <tr>
+    <th>jump</th>
+    <th>challenge</th>
   </tr>
   <% @ranking.each_with_index do|user, i| %>
     <tr>
       <td><%=@rank_start + i + 1%></td>
-      <td><%=user.jump_count.to_i%></td>
+      <td><%=user.total_count%></td>
+      <td><%=user.total_challenge%></td>
       <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
       <td><%=user.results.last.mapname%></td>
       <td><%=user.results.last.created%></td>
     </tr>
 <% end %>
 </table>
+<%= paginate @ranking%>
 
