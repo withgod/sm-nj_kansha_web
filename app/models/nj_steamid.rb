@@ -11,6 +11,10 @@ class NjSteamid < ActiveRecord::Base
     return self.nicknames.last.nickname
   end
   def average_count_per_jump
-    return self.total_count / self.results.size
+    if self.total_count != 0 && self.results.size != 0 then
+      return self.total_count / self.results.size
+    else
+      return 0
+    end
   end
 end

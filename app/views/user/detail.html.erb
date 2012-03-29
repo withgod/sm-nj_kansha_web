@@ -21,6 +21,7 @@
   <dd><%= @user.average_count_per_jump%></dd>
 </dl>
 <h2>last activity</h2>
+<% if @user.results.last then %>
 <dl>
   <dt>date</dt>
   <dd><%= @user.results.last.created%></dd>
@@ -33,3 +34,6 @@
   <dt>server</dt>
   <dd><%= @user.results.last.tags%></dd>
 </dl>
+<% else %>
+  nothing last activity
+<% end %>
