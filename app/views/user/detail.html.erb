@@ -30,7 +30,7 @@
     <th>jump count</th>
     <th>date</th>
   </tr>
-<% @user.results.each do |result| %>
+<% @user.results.order('id desc').each do |result| %>
   <tr>
     <td><%=result.mapname%></td>
     <td><%=result.jump_count%></td>
