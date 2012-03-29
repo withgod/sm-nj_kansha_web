@@ -12,7 +12,7 @@
   </span>
   </dd>
   <dt>steam id</dt>
-  <dd><%=params[:id]%>/<%=@user[:steamid]%></dd>
+  <dd><%=@user.id%>/<%=params[:id]%>/<%=@user[:steamid]%></dd>
   <dt>total jump challenge</dt>
   <dd><%= @user.results.size%></dd>
   <dt>total jump count</dt>
@@ -20,20 +20,21 @@
   <dt>average jump count per challenge</dt>
   <dd><%= @user.average_count_per_jump%></dd>
 </dl>
-<h2>last activity</h2>
-<% if @user.results.last then %>
-<dl>
-  <dt>date</dt>
-  <dd><%= @user.results.last.created%></dd>
-  <dt>nickname</dt>
-  <dd><%= @user.last_nick%></dd>
-  <dt>map</dt>
-  <dd><%= @user.results.last.mapname%></dd>
-  <dt>jump count</dt>
-  <dd><%= @user.results.last.jump_count%></dd>
-  <dt>server</dt>
-  <dd><%= @user.results.last.tags%></dd>
-</dl>
-<% else %>
+<h2>recent activity</h2>
+<% if !@user.results.last then %>
   nothing last activity
 <% end %>
+<table>
+  <tr>
+    <th>mapname</th>
+    <th>jump count</th>
+    <th>date</th>
+  </tr>
+<% @user.results.each do |result| %>
+  <tr>
+    <td><%=result.mapname%></td>
+    <td><%=result.jump_count%></td>
+    <td><%=result.created%></td>
+  </tr>
+<% end %>
+</table>
