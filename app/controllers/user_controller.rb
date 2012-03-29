@@ -1,6 +1,17 @@
 class UserController < ApplicationController
   def index
-    @users = NjSteamid.all()
+  #  @ranking= NjSteamid.find(:all,
+  #                           :select => 'nj_steamids.*, sum(nj_kansha_results.jump_count) as jump_count',
+  #                           :joins => 'left join nj_kansha_results on nj_kansha_results.nj_steamid_id = nj_steamids.id',
+  #                           :group => 'nj_steamids.id',
+  #                           :order => "jump_count desc",
+  #                           :conditions => 'jump_count > 0'
+  #                          )
+    @rank_start = 0;
+    if params[:page].to_i > 1 then
+      @rank_start = (params[:page].to_i - 1 )* 50
+    end
+    @ranking = NjSteamid.ranking_scope.page(params[:page])
   end
 
   def detail
