@@ -11,16 +11,26 @@
     <% end %>
   </span>
   </dd>
-  <dt>steam id</dt>
-  <dd><%=@user.id%>/<%=params[:id]%>/<%=@user[:steamid]%></dd>
+  <dt>kansha id/steam community id/steam id</dt>
+  <dd><%=@user.id%>/<%=@user.steamcomid%>/<%=@user.steamid%></dd>
+  <dt>jump since at</dt>
+  <dd><%= @user.since_at%></dd>
+  <dt>jump period</dt>
+  <dd><%= @user.jump_period%> days</dd>
   <dt>total jump challenge</dt>
   <dd><%= @user.results.size%></dd>
   <dt>total jump count</dt>
-  <dd><%= @user.results.sum(:jump_count)%></dd>
+  <dd><%= @user.total_count%></dd>
+  <dt>total challenge date count</dt>
+  <dd><%= @user.total_challenge_date_count%></dd>
   <dt>average jump count per challenge</dt>
   <dd><%= @user.average_count_per_jump%></dd>
+  <dt>average jump count per date</dt>
+  <dd><%= @user.average_count_per_date%></dd>
+  <dt>average jump count per period</dt>
+  <dd><%= @user.average_count_per_period%></dd>
 </dl>
-<h2>recent activity</h2>
+<h2>recent 20 activity</h2>
 <% if !@user.results.last then %>
   nothing last activity
 <% end %>
@@ -28,12 +38,14 @@
   <tr>
     <th>mapname</th>
     <th>jump count</th>
+    <th>server</th>
     <th>date</th>
   </tr>
-<% @user.results.order('id desc').each do |result| %>
+<% @user.results.order('id desc').limit(20).each do |result| %>
   <tr>
     <td><%=result.mapname%></td>
     <td><%=result.jump_count%></td>
+    <td><%=result.tags%></td>
     <td><%=result.created%></td>
   </tr>
 <% end %>
