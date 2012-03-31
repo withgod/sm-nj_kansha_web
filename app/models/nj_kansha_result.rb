@@ -10,4 +10,8 @@ class NjKanshaResult < ActiveRecord::Base
   def created
     return self.created_at.to_s.sub(' UTC', '')
   end
+
+  def classname
+    return self.nj_class.classname
+  end
 end
