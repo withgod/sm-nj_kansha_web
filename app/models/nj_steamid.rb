@@ -10,6 +10,16 @@ class NjSteamid < ActiveRecord::Base
   .group('nj_steamids.id')
   .order('jump_count desc')
   .where('jump_count > 0')
+  scope :ranking_scope_sol, select('nj_steamids.*, sum(nj_kansha_results.jump_count) as jump_count')
+  .joins('left join nj_kansha_results on nj_kansha_results.nj_steamid_id = nj_steamids.id')
+  .group('nj_steamids.id')
+  .order('jump_count desc')
+  .where('jump_count > 0 and nj_kansha_results.nj_class_id = 3')
+  scope :ranking_scope_demo, select('nj_steamids.*, sum(nj_kansha_results.jump_count) as jump_count')
+  .joins('left join nj_kansha_results on nj_kansha_results.nj_steamid_id = nj_steamids.id')
+  .group('nj_steamids.id')
+  .order('jump_count desc')
+  .where('jump_count > 0 and nj_kansha_results.nj_class_id = 4')
 
   def total_count
     return self.results.sum(:jump_count)

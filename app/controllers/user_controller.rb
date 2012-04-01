@@ -12,6 +12,8 @@ class UserController < ApplicationController
       @rank_start = (params[:page].to_i - 1 )* 50
     end
     @ranking = NjSteamid.ranking_scope.page(params[:page])
+    @ranking_demo = NjSteamid.ranking_scope_demo.page(params[:page])
+    @ranking_sol  = NjSteamid.ranking_scope_sol.page(params[:page])
   end
 
   def detail
