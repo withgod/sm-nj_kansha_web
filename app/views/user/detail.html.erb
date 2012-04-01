@@ -15,20 +15,63 @@
   <dd><%=@user.id%>/<%=@user.steamcomid%>/<%=@user.steamid%></dd>
   <dt>jump since at</dt>
   <dd><%= @user.since_at%></dd>
-  <dt>jump period</dt>
-  <dd><%= @user.jump_period%> days</dd>
-  <dt>total jump challenge</dt>
-  <dd><%= @user.results.size%></dd>
-  <dt>total jump count</dt>
-  <dd><%= @user.total_count%></dd>
-  <dt>total challenge date count</dt>
-  <dd><%= @user.total_challenge_date_count%></dd>
-  <dt>average jump count per challenge</dt>
-  <dd><%= @user.average_count_per_jump%></dd>
-  <dt>average jump count per date</dt>
-  <dd><%= @user.average_count_per_date%></dd>
-  <dt>average jump count per period</dt>
-  <dd><%= @user.average_count_per_period%></dd>
+  <dt>jump period(sol/demo/all)</dt>
+  <dd><%= jump_period @user.results.soldier%>/<%= jump_period @user.results.demoman%>/<%= jump_period @user.results%> days</dd>
+</dl>
+  <table>
+    <tr>
+      <th colspan="6">total count</th>
+      <th rowspan="2" colspan="3">challenge date</th>
+      <th colspan="9">average count</th>
+    </tr>
+    <tr>
+      <th colspan="3">challenge</th>
+      <th colspan="3">jump</th>
+      <th colspan="3">challenge</th>
+      <th colspan="3">challenge date</th>
+      <th colspan="3">perido</th>
+    </tr>
+    <tr>
+      <th>sol</th>
+      <th>demo</th>
+      <th>all</th>
+      <th>sol</th>
+      <th>demo</th>
+      <th>all</th>
+      <th>sol</th>
+      <th>demo</th>
+      <th>all</th>
+      <th>sol</th>
+      <th>demo</th>
+      <th>all</th>
+      <th>sol</th>
+      <th>demo</th>
+      <th>all</th>
+      <th>sol</th>
+      <th>demo</th>
+      <th>all</th>
+    </tr>
+    <tr>
+      <td><%= @user.results.soldier.size%></td>
+      <td><%= @user.results.demoman.size%></td>
+      <td><%= @user.results.size%></td>
+      <td><%= @user.results.soldier.sum(:jump_count)%></td>
+      <td><%= @user.results.demoman.sum(:jump_count)%></td>
+      <td><%= @user.results.sum(:jump_count)%></td>
+      <td><%= total_challenge_date_count(@user.results.soldier)%></td>
+      <td><%= total_challenge_date_count(@user.results.demoman)%></td>
+      <td><%= total_challenge_date_count(@user.results)%></td>
+      <td><%= average_count_per_challenge(@user.results.soldier)%></td>
+      <td><%= average_count_per_challenge(@user.results.demoman)%></td>
+      <td><%= average_count_per_challenge(@user.results)%></td>
+      <td><%= average_count_per_date(@user.results.soldier)%></td>
+      <td><%= average_count_per_date(@user.results.demoman)%></td>
+      <td><%= average_count_per_date(@user.results)%></td>
+      <td><%= average_count_per_period(@user.results.soldier)%></td>
+      <td><%= average_count_per_period(@user.results.demoman)%></td>
+      <td><%= average_count_per_period(@user.results)%></td>
+    </tr>
+  </table>
 </dl>
 <h2>recent 20 activity</h2>
 <% if !@user.results.last then %>
