@@ -5,8 +5,9 @@ SmNjKanshaWeb::Application.routes.draw do
   match 'class/show/:id' => 'class#show'
 
   get "user/index"
-  match "user/index/:page" => "user#index", :defaults => { :page=> 1}
+  match "user/index/:page" => "user#index", :defaults => { :page=> 1 }
   match 'user/:id' => 'user#detail'
+  match 'user/rank/:type/:page' => 'user#rank', :defaults => {:type => 'all', :page => 1}
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
