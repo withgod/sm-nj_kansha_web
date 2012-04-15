@@ -29,11 +29,20 @@ class UserController < ApplicationController
       _type = 'nj_kansha_results.nj_class_id = 3'
     end
 
-    @ranking = NjSteamid.select('nj_steamids.*, count(nj_kansha_results.id) as challenge_count, sum(nj_kansha_results.jump_count) as jump_count, nj_map_id, nj_kansha_results.created_at')
+    @ranking = NjSteamid
+    .select('nj_steamids.*,  nj_maps.mapname as last_mapname, count(nj_kansha_results.id) as challenge_count, sum(nj_kansha_results.jump_count) as jump_count, nj_map_id, nj_kansha_results.created_at')
     .joins('left join nj_kansha_results on nj_kansha_results.nj_steamid_id = nj_steamids.id')
     .group('nj_steamids.id')
     .order('jump_count desc')
-    .where('jump_count > 0 and ' + _type).page(params[:page])
+    .where('jump_count > 0 and ' + _type)
+    .joins('left join nj_steam_nicknames on nj_steamids.id = nj_steam_nicknames.nj_steamid_id')
+    .joins('left join nj_maps on nj_kansha_results.nj_map_id = nj_maps.id')
+    .page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json {render :json => @ranking.to_json(:include => [:nicknames])}
+    end
   end
 
   def detail
