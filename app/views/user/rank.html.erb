@@ -1,0 +1,21 @@
+<h1>User#ranking</h1>
+<ul>
+  <li><a href="/user/rank/all/1">all</a></li>
+  <li><a href="/user/rank/sol/1">sol</a></li>
+  <li><a href="/user/rank/demo/1">demo</a></li>
+</ul>
+    <th>jump</th>
+    <th>challenge</th>
+  </tr>
+  <% @ranking.each_with_index do|user, i| %>
+    <tr>
+      <td><%=@rank_start + i + 1%></td>
+      <td><%=user.jump_count.to_i%></td>
+      <td><%=user.challenge_count%></td>
+      <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
+      <td><%=NjMap.find(user.nj_map_id).mapname%></td>
+      <td><%=user.created_at.to_s().sub(" UTC", "")%></td>
+    </tr>
+<% end %>
+</table>
+

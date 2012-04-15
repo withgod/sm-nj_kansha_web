@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-dropdown
 //= require bootstrap-twipsy
 //= require bootstrap-popover
 //= require bootstrap-modal
+//= require commons
 //= require_tree .
+
