@@ -9,6 +9,7 @@ SmNjKanshaWeb::Application.routes.draw do
   get "user/index"
   match "user/index/:page" => "user#index", :defaults => { :page=> 1 }
   match 'user/:id' => 'user#detail'
+  match 'user/:id/recent_20_activity' => 'user#recent_20_activity'
   match 'user/rank/:type/:page' => 'user#rank', :defaults => {:type => 'all', :page => 1}
 
   # The priority is based upon order of creation:

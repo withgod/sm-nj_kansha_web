@@ -5,6 +5,10 @@ class NjKanshaResult < ActiveRecord::Base
 
   scope :soldier, where('nj_class_id = 3')
   scope :demoman, where('nj_class_id = 4')
+  scope :daily_count,
+    select('date(nj_kansha_results.created_at) as created_at, sum(jump_count) as cnt')
+    .group('date(nj_kansha_results.created_at)')
+    .order('created_at desc')
 
   def mapname
     return self.nj_map.mapname

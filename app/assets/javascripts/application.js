@@ -16,6 +16,8 @@
 //= require bootstrap-twipsy
 //= require bootstrap-popover
 //= require bootstrap-modal
+//= require excanvas
+//= require line
 //= require commons
 //= require_tree .
 

@@ -16,6 +16,14 @@ class UserController < ApplicationController
     @ranking_sol  = NjSteamid.ranking_scope_sol.page(params[:page])
   end
 
+  def recent_20_activity
+    @result =  NjSteamid.find_by_steamcomid(params[:id]).results.daily_count.limit(20)
+
+    respond_to do |format|
+      format.json {render :json => @result.reverse.to_json}
+    end
+  end
+
   def rank
     @rank_start = 0;
     if params[:page].to_i > 1 then
