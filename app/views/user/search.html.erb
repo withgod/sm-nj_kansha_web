@@ -1,0 +1,7 @@
+<h1>User#search</h1>
+<h2>result</h2>
+<ul>
+  <% @nicks.each do|nick|%>
+    <li><a href="/user/<%= nick.nj_steamid.steamcomid %>"><%= nick.nickname %></a></li>
+  <% end %>
+</ul>

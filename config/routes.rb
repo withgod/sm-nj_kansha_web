@@ -7,6 +7,7 @@ SmNjKanshaWeb::Application.routes.draw do
   match 'class/show/:id' => 'class#show'
 
   get "user/index"
+  match "user/search" => 'user#search'
   match "user/index/:page" => "user#index", :defaults => { :page=> 1 }
   match 'user/:id' => 'user#detail'
   match 'user/:id/recent_20_activity' => 'user#recent_20_activity'

@@ -1,4 +1,7 @@
 class UserController < ApplicationController
+  def search
+    @nicks = NjSteamNickname.where('nickname like ?', "%#{params[:q]}%")
+  end
   def index
   #  @ranking= NjSteamid.find(:all,
   #                           :select => 'nj_steamids.*, sum(nj_kansha_results.jump_count) as jump_count',
