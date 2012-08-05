@@ -14,9 +14,10 @@ class UserController < ApplicationController
     if params[:page].to_i > 1 then
       @rank_start = (params[:page].to_i - 1 )* 50
     end
-    @ranking = NjSteamid.ranking_scope.page(params[:page])
-    @ranking_demo = NjSteamid.ranking_scope_demo.page(params[:page])
-    @ranking_sol  = NjSteamid.ranking_scope_sol.page(params[:page])
+    @ranking          = NjSteamid.ranking_scope.page(params[:page])
+    @ranking_demo     = NjSteamid.ranking_scope_demo.page(params[:page])
+    @ranking_sol      = NjSteamid.ranking_scope_sol.page(params[:page])
+    @ranking_starters = NjSteamid.ranking_scope_starters.page(params[:page])
   end
 
   def recent_20_activity
