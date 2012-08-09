@@ -1,0 +1,22 @@
+<H1>map ranking</H1>
+<h2 id="ranking"><%=@mapname %> jump ranking </h2>
+<%= paginate @ranking %>
+<table>
+  <tr>
+    <th>rank</th>
+    <th>total jump count</th>
+    <th>nickname</th>
+    <th>last map</th>
+    <th>last challenge</th>
+  </tr>
+  <% @ranking.each_with_index do|user, i| %>
+    <tr>
+      <td><%=@rank_start + i + 1%></td>
+      <td><%=user.jump_count.to_i%></td>
+      <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
+      <td><%=user.results.last.mapname%></td>
+      <td><a href="/map/ranking/<%=user.results.last.mapname%>/1"><%=user.results.last.mapname%></a></td>
+      <td><%=user.results.last.created%></td>
+    </tr>
+<% end %>
+</table>
