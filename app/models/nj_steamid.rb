@@ -25,6 +25,11 @@ class NjSteamid < ActiveRecord::Base
   .group('nj_steamids.id')
   .order('jump_count desc')
   .where('jump_count > 0 and nj_kansha_results.nj_map_id in (8, 89)')
+  scope :ranking_scope_xxx, lambda {|mapname| select('nj_steamids.*, sum(nj_kansha_results.jump_count) as jump_count')
+  .joins('left join nj_kansha_results on nj_kansha_results.nj_steamid_id = nj_steamids.id')
+  .group('nj_steamids.id')
+  .order('jump_count desc')
+  .where("jump_count > 0 and nj_kansha_results.nj_map_id = #{mapname}")}
 
   def total_count
     return self.results.sum(:jump_count)

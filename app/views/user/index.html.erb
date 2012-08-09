@@ -26,7 +26,7 @@ total ranked user [<%=@ranking.total_count%>]
       <td><%=user.total_count%></td>
       <td><%=user.total_challenge%></td>
       <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
-      <td><%=user.results.last.mapname%></td>
+      <td><a href="/map/ranking/<%=user.results.last.mapname%>/1"><%=user.results.last.mapname%></a></td>
       <td><%=user.results.last.created%></td>
     </tr>
 <% end %>
@@ -47,7 +47,7 @@ total ranked user [<%=@ranking.total_count%>]
       <td><%=@rank_start + i + 1%></td>
       <td><%=user.jump_count.to_i%></td>
       <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
-      <td><%=user.results.last.mapname%></td>
+      <td><a href="/map/ranking/<%=user.results.last.mapname%>/1"><%=user.results.last.mapname%></a></td>
       <td><%=user.results.last.created%></td>
     </tr>
 <% end %>
@@ -86,7 +86,7 @@ total ranked user [<%=@ranking.total_count%>]
       <td><%=@rank_start + i + 1%></td>
       <td><%=user.jump_count.to_i%></td>
       <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
-      <td><%=user.results.last.mapname%></td>
+      <td><a href="/map/ranking/<%=user.results.last.mapname%>/1"><%=user.results.last.mapname%></a></td>
       <td><%=user.results.last.created%></td>
     </tr>
 <% end %>

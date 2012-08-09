@@ -13,7 +13,7 @@
       <td><%=user.jump_count.to_i%></td>
       <td><%=user.challenge_count%></td>
       <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
-      <td><%=NjMap.find(user.nj_map_id).mapname%></td>
+      <td><a href="/map/ranking/<%=NjMap.find(user.nj_map_id).mapname%>/1"><%=NjMap.find(user.nj_map_id).mapname%></a></td>
       <td><%=user.created_at.to_s().sub(" UTC", "")%></td>
     </tr>
 <% end %>

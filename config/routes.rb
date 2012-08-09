@@ -2,6 +2,7 @@ SmNjKanshaWeb::Application.routes.draw do
   get "top/index"
 
   get "map/index"
+  match "map/ranking/:mapname/:page" => "map#ranking", :defaults => { :page=> 1 }
 
   get "class/show"
   match 'class/show/:id' => 'class#show'

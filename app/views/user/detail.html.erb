@@ -87,7 +87,7 @@
   </tr>
 <% @user.results.order('id desc').limit(20).each do |result| %>
   <tr>
-    <td><%=result.mapname%></td>
+    <td><a href="/map/ranking/<%=result.mapname%>/1"><%=result.mapname%></a></td>
     <td><%=result.jump_count%></td>
     <td><%=result.classname%></td>
     <td><%=result.tags%></td>

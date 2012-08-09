@@ -2,7 +2,7 @@
 <h2>challenge count ranking</h2>
 <ul>
   <% @maps.sort {|a, b| b.results.size  <=> a.results.size}.each do |map| %>
-    <li><%=map.results.size%> <%=map.mapname%></li>
+    <li><%=map.results.size%> <a href="/map/ranking/<%=map.mapname%>/1"><%=map.mapname%></a></li>
   <% end %>
 </ul>
 
