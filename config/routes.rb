@@ -14,6 +14,8 @@ SmNjKanshaWeb::Application.routes.draw do
   match 'user/:id/recent_20_activity' => 'user#recent_20_activity'
   match 'user/rank/:type/:page' => 'user#rank', :defaults => {:type => 'all', :page => 1}
 
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy", :as => :signout
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

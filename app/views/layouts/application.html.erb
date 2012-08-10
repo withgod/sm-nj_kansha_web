@@ -47,20 +47,18 @@
           <form class="pull-left" action="/user/search">
             <input type="text" name="q" placeholder="Search by Nickname">
           </form>
-          <!--
-          <ul class="nav secondary-nav">
-            <li><a href="/user/mypage">Mypage</a></li>
-            <li class="dropdown">
-            <a href="#" class="dropdown-toggle">Dropdown</a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Secondary link</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Another link</a></li>
-            </ul>
+          <ul class="nav secondary-nav" style="height:28px">
+            <% if current_user %>
+              <li><a href="/user/<%= current_user[:steamid]%>"><%=raw current_user[:steaminfo].nickname%></a></li>
+              <li><%= link_to "Sign Out", signout_path %></li>
+
+          <% else %>
+            <li>
+              <%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png", {:border => '0', :alt => 'login'}), "/auth/open_id?openid_url=http://steamcommunity.com/openid" %>
             </li>
+          <% end %>
+
           </ul>
-            -->
         </div>
       </div><!-- /topbar-inner -->
     </div><!-- /topbar -->

@@ -39,4 +39,8 @@ gem 'unicorn'
 
 gem 'kaminari'
 #gem 'less-rails-bootstrap'
+gem 'omniauth'
+gem 'omniauth-openid'
+
+gem 'steam-condenser'
 
