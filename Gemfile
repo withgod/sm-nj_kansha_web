@@ -44,3 +44,5 @@ gem 'omniauth-openid'
 
 gem 'steam-condenser'
 
+gem "twitter-bootstrap-rails"
+

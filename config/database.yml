@@ -17,7 +17,7 @@ development:
   username: sourcemod
   password: sourcemodpassword
 #socket: /var/run/mysqld/mysqld.sock
-  port: 23306
+  port: 3306
   host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
@@ -32,7 +32,7 @@ test:
   username: sourcemod
   password: sourcemodpassword
 #  socket: /var/run/mysqld/mysqld.sock
-  port: 23306
+  port: 3306
   host: 127.0.0.1
 
 production:
@@ -44,5 +44,5 @@ production:
   username: sourcemod
   password: sourcemodpassword
 #  socket: /var/run/mysqld/mysqld.sock
-  port: 23306
+  port: 3306
   host: 127.0.0.1

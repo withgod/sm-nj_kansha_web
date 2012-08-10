@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>SmNjKanshaWeb</title>
-  <LINK rel="stylesheet" type="text/css" title="main" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "SmNjKanshaWeb" %></title>
+    <%= csrf_meta_tags %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
   <% if Rails.env.production? %>
   <!-- for fps.withgod.jp -->
   <script type="text/javascript">
@@ -20,53 +28,55 @@
      })();
    </script>
  <% end %>
-</head>
-<body>
-  <div class="container">
-  <div class="topbar-wrapper" style="z-index: 5;">
-    <div class="topbar" data-dropdown="dropdown">
-      <div class="topbar-inner">
+  </head>
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
-          <h3><a href="#">Kansha no Jump</a></h3>
-          <ul class="nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/user/index">Ranking</a></li>
-            <li><a href="/map/index">Maps</a></li>
-            <!--
-            <li class="dropdown">
-            <a href="#" class="dropdown-toggle">Dropdown</a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Secondary link</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Another link</a></li>
+          <a class="brand" href="/">SmNjKanshaWeb</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="<%= 'active' if params[:controller] == 'user'%>"><a href="/user/index">Ranking</a></li>
+              <li class="<%= 'active' if params[:controller] == 'map' %>"><a href="/map/index">Maps</a></li>
             </ul>
-            </li>
-            -->
-          </ul>
-          <form class="pull-left" action="/user/search">
-            <input type="text" name="q" placeholder="Search by Nickname">
-          </form>
-          <ul class="nav secondary-nav" style="height:28px">
-            <% if current_user %>
-              <li><a href="/user/<%= current_user[:steamid]%>"><%=raw current_user[:steaminfo].nickname%></a></li>
+            <form class="navbar-search pull-left" action="/user/search">
+              <input type="text" name="q" placeholder="Search by Nickname">
+            </form>
+            <ul class="nav pull-right">
+              <% if current_user %>
+                <li><a href="/user/<%= current_user[:steamid]%>"><%=raw current_user[:steaminfo].nickname%></a></li>
+                <li class="divider-vertical"></li>
               <li><%= link_to "Sign Out", signout_path %></li>
 
-          <% else %>
-            <li>
+            <% else %>
+                <li>
               <%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png", {:border => '0', :alt => 'login'}), "/auth/open_id?openid_url=http://steamcommunity.com/openid" %>
-            </li>
-          <% end %>
-
-          </ul>
+              </li>
+            <% end %>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-      </div><!-- /topbar-inner -->
-    </div><!-- /topbar -->
-  </div>
-<%= yield %>
-  <footer>
-  &copy; 2012 withgod.jp
-  </footer>
-  </div>
-</body>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        <div class="row">
+              <%= yield %>
+        </div><!--/row-->
+      </div><!--/content-->
+
+      <footer>
+        <p>&copy; Company 2012 withgod.jp</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
+
+  </body>
 </html>

@@ -1,13 +1,4 @@
 $(function(){
-  $("a[rel=popover]")
-  .popover({
-    offset: 10,
-    html: true,
-    content: $("#nicknames").html()
-  })
-  .click(function(e) {
-    e.preventDefault()
-  })
   var _uid = window.location.href.split('/')[4];
   if (_uid != undefined && _uid.match(/^\d+$/)) {
     $.get('/user/' + _uid + '/recent_20_activity.json', function(data) {
@@ -22,5 +13,4 @@ $(function(){
     });
   }
 });
-
 

@@ -12,12 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-dropdown
-//= require bootstrap-twipsy
-//= require bootstrap-popover
-//= require bootstrap-modal
+//= require twitter/bootstrap
 //= require excanvas
 //= require line
-//= require commons
 //= require_tree .
 

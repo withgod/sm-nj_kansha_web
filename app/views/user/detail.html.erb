@@ -4,12 +4,23 @@
   <dt>nickname</dt>
   <dd>
   <%=@user.last_nick%>
-  <a href="javascript:void(0)" rel="popover" title="other nicknames">alias</a>
-  <span style="display:none" id="nicknames">
-    <% @user.nicknames.each do|nick| %>
-      <%= nick.nickname%><br>
-    <% end %>
-  </span>
+  <a class="btn" data-target="#nicknames" href="javascript:void(0)" data-toggle="modal">alias</a>
+  <div class="modal hide" id="nicknames">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Nicknames</h3>
+    </div>
+    <div class="modal-body">
+      <ul>
+      <% @user.nicknames.each do|nick| %>
+        <li><%= nick.nickname%></li>
+      <% end %>
+    </ul>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+  </div>
   </dd>
   <dt>kansha id/steam community id/steam id</dt>
   <dd><%=@user.id%>/<%=@user.steamcomid%>/<%=@user.steamid%></dd>
@@ -18,12 +29,15 @@
   <dt>jump period(sol/demo/all)</dt>
   <dd><%= jump_period @user.results.soldier%>/<%= jump_period @user.results.demoman%>/<%= jump_period @user.results%> days</dd>
 </dl>
-  <table>
+  <table class="table">
+    <thead>
     <tr>
       <th colspan="6">total count</th>
       <th rowspan="2" colspan="3">challenge date</th>
       <th colspan="9">average count</th>
     </tr>
+    </thead>
+    <tbody>
     <tr>
       <th colspan="3">challenge</th>
       <th colspan="3">jump</th>
@@ -71,13 +85,15 @@
       <td><%= average_count_per_period(@user.results.demoman)%></td>
       <td><%= average_count_per_period(@user.results)%></td>
     </tr>
+    </tbody>
   </table>
 </dl>
 <h2>recent 20 activity</h2>
 <% if !@user.results.last then %>
   nothing last activity
 <% end %>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>mapname</th>
     <th>jump count</th>
@@ -85,6 +101,8 @@
     <th>server</th>
     <th>date</th>
   </tr>
+</thead>
+<tbody>
 <% @user.results.order('id desc').limit(20).each do |result| %>
   <tr>
     <td><a href="/map/ranking/<%=result.mapname%>/1"><%=result.mapname%></a></td>
@@ -94,9 +112,8 @@
     <td><%=result.created%></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 <h2>recent 20 days activity summary</h2>
 <div id="recent_20_box"><canvas width="940" height="300" id="graph1"></canvas></div>
-
-
 
