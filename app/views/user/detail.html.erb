@@ -1,42 +1,66 @@
 <div class="span12">
-<h1>User#detail</h1>
-<h2>summary</h2>
-<dl>
-  <dt>nickname</dt>
-  <dd>
-  <%=@user.last_nick%>
-  <a class="btn" data-target="#nicknames" href="javascript:void(0)" data-toggle="modal">alias</a>
-  <div class="modal hide" id="nicknames">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">×</button>
-      <h3>Nicknames</h3>
+  <h2>profile</h2>
+  <div class="row">
+    <div class="span4">
+      <img src=<%=@steaminfo.full_avatar_url%> alt="steam profile image" />
+      <dl>
+        <dt>kansha id/steam community id/steam id</dt>
+        <dd><%=@user.id%>/<%=@user.steamcomid%>/<%=@user.steamid%></dd>
+        <dt>jump since at</dt>
+        <dd><%= @user.since_at%></dd>
+        <dt>jump period(sol/demo/all)</dt>
+        <dd><%= jump_period @user.results.soldier%>/<%= jump_period @user.results.demoman%>/<%= jump_period @user.results%> days</dd>
+      </dl>
     </div>
-    <div class="modal-body">
-      <ul>
-      <% @user.nicknames.each do|nick| %>
-        <li><%= nick.nickname%></li>
-      <% end %>
-    </ul>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <div class="span4">
+      <div class="row">
+        <div class="span8">
+          <% if @steaminfo.is_online? %>
+            <span class="label label-success">online</span>
+        <% else %>
+            <span class="label label-inverse">offline</span>
+        <% end %>
+          <strong><%=@user.last_nick%> <%= '('+  @steaminfo.nickname + ')' if @user.last_nick != @steaminfo.nickname%></strong>
+          <a data-target="#nicknames" href="javascript:void(0)" data-toggle="modal">alias</a>
+          <br>
+          <%=@steaminfo.head_line %>
+        </div>
+        <div class="span8">
+          <dl>
+            <dt>profile url</dt>
+            <% if @steaminfo.custom_url %>
+              <a href="http://steamcommunity.com/id/<%= @steaminfo.custom_url%>">http://steamcommunity.com/id/<%= @steaminfo.custom_url%></a>
+          <% else %>
+              <a href="http://steamcommunity.com/profiles/<%= @steaminfo.steam_id64%>">http://steamcommunity.com/profiles/<%= @steaminfo.steam_id64%></a>
+          <% end %>
+            <% if @steaminfo.privacy_state == 'public' %>
+              <dt>state</dt>
+            <dd><%=@steaminfo.state_message%></dd>
+            <dt>summary</dt>
+            <dd>
+            <blockquote>
+            <%= raw @steaminfo.summary%>
+            </blockquote>
+            </dd>
+            <% if @steaminfo.links %>
+              <dt>links</dt>
+            <% @steaminfo.links.each do |k, v| %>
+              <dd><a href="<%=v%>"><%=k%></a></dd>
+          <% end %>
+          <% end %>
+          <% end %>
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
-  </dd>
-  <dt>kansha id/steam community id/steam id</dt>
-  <dd><%=@user.id%>/<%=@user.steamcomid%>/<%=@user.steamid%></dd>
-  <dt>jump since at</dt>
-  <dd><%= @user.since_at%></dd>
-  <dt>jump period(sol/demo/all)</dt>
-  <dd><%= jump_period @user.results.soldier%>/<%= jump_period @user.results.demoman%>/<%= jump_period @user.results%> days</dd>
-</dl>
   <table class="table">
     <thead>
-    <tr>
-      <th colspan="6">total count</th>
-      <th rowspan="2" colspan="3">challenge date</th>
-      <th colspan="9">average count</th>
-    </tr>
+      <tr>
+        <th colspan="6">total count</th>
+        <th rowspan="2" colspan="3">challenge date</th>
+        <th colspan="9">average count</th>
+      </tr>
     </thead>
     <tbody>
     <tr>
@@ -95,17 +119,17 @@
 <% end %>
 <table class="table">
   <thead>
-  <tr>
-    <th>mapname</th>
-    <th>jump count</th>
-    <th>class</th>
-    <th>server</th>
-    <th>date</th>
-  </tr>
-</thead>
-<tbody>
-<% @user.results.order('id desc').limit(20).each do |result| %>
-  <tr>
+    <tr>
+      <th>mapname</th>
+      <th>jump count</th>
+      <th>class</th>
+      <th>server</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.results.order('id desc').limit(20).each do |result| %>
+    <tr>
     <td><a href="/map/ranking/<%=result.mapname%>/1"><%=result.mapname%></a></td>
     <td><%=result.jump_count%></td>
     <td><%=result.classname%></td>
@@ -113,8 +137,23 @@
     <td><%=result.created%></td>
   </tr>
 <% end %>
-</tbody>
+  </tbody>
 </table>
 <h2>recent 20 days activity summary</h2>
 <div id="recent_20_box"><canvas width="940" height="300" id="graph1"></canvas></div>
+<div class="modal hide" id="nicknames">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Nicknames</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <% @user.nicknames.each do|nick| %>
+        <li><%= nick.nickname%></li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
 </div>
