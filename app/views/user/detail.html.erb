@@ -31,7 +31,7 @@
               <dd><a href="<%= @steaminfo.base_url%>"><%= @steaminfo.base_url%></a></dd>
             <% if @steaminfo.privacy_state == 'public' %>
               <dt>state</dt>
-            <dd><%=@steaminfo.state_message%></dd>
+            <dd><%=raw @steaminfo.state_message%></dd>
             <dt>summary</dt>
             <dd>
             <blockquote>
