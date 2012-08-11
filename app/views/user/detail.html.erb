@@ -23,12 +23,12 @@
           <strong><%=@user.last_nick%> <%= '('+  @steaminfo.nickname + ')' if @user.last_nick != @steaminfo.nickname%></strong>
           <a data-target="#nicknames" href="javascript:void(0)" data-toggle="modal">alias</a>
           <br>
-          <%=@steaminfo.head_line %>
+          <%= @steaminfo.head_line %>
         </div>
         <div class="span8">
           <dl>
             <dt>profile url</dt>
-            <dd><a href="<%= @steaminfo.base_url%>"><%= @steaminfo.base_url%></a></dd>
+              <dd><a href="<%= @steaminfo.base_url%>"><%= @steaminfo.base_url%></a></dd>
             <% if @steaminfo.privacy_state == 'public' %>
               <dt>state</dt>
             <dd><%=@steaminfo.state_message%></dd>

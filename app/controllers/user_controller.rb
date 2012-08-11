@@ -59,7 +59,34 @@ class UserController < ApplicationController
 
   def detail
     require 'steam-condenser'
-    @steaminfo = SteamId.new(params[:id].to_i)
+    begin
+      @steaminfo = SteamId.new(params[:id].to_i)
+    rescue SteamCondenserError
+      @steaminfo = SteamIdDummy.new(params[:id].to_i);
+    end
     @user      = NjSteamid.find_by_steamcomid(params[:id])
+  end
+end
+class SteamIdDummy
+  def initialize(id)
+    @id = id
+  end
+  def full_avatar_url
+    return 'http://media.steampowered.com/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'
+  end
+  def is_online?
+    return nil
+  end
+  def nickname
+    return ''
+  end
+  def head_line
+    return ''
+  end
+  def privacy_state
+    return 'private'
+  end
+  def base_url
+    return 'http://steamcommunity.com/profiles/' + @id.to_s
   end
 end
