@@ -1,4 +1,3 @@
-require 'steam-condenser'
 class UserController < ApplicationController
   def search
     @nicks = NjSteamNickname.where('nickname like ?', "%#{params[:q]}%")
@@ -59,7 +58,12 @@ class UserController < ApplicationController
   end
 
   def detail
+    require 'steam-condenser'
     @steaminfo = SteamId.new(params[:id].to_i)
+    if @steaminfo.steam_id64 != params[:id].to_i then
+      SteamId.clear_cache
+      @steaminfo = SteamId.new(params[:id].to_i)
+    end
     @user      = NjSteamid.find_by_steamcomid(params[:id])
   end
 end
