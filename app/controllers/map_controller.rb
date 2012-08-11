@@ -9,6 +9,6 @@ class MapController < ApplicationController
     if params[:page].to_i > 1 then
       @rank_start = (params[:page].to_i - 1 )* 50
     end
-    @ranking = NjSteamid.ranking_scope_xxx(@mapid).page(params[:page])
+    @ranking = NjSteamid.ranking_scope_xxx(@mapid).page(params[:page]).per(500)
   end
 end
