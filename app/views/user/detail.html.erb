@@ -28,11 +28,7 @@
         <div class="span8">
           <dl>
             <dt>profile url</dt>
-            <% if @steaminfo.custom_url %>
-              <a href="http://steamcommunity.com/id/<%= @steaminfo.custom_url%>">http://steamcommunity.com/id/<%= @steaminfo.custom_url%></a>
-          <% else %>
-              <a href="http://steamcommunity.com/profiles/<%= @steaminfo.steam_id64%>">http://steamcommunity.com/profiles/<%= @steaminfo.steam_id64%></a>
-          <% end %>
+            <dd><a href="<%= @steaminfo.base_url%>"><%= @steaminfo.base_url%></a></dd>
             <% if @steaminfo.privacy_state == 'public' %>
               <dt>state</dt>
             <dd><%=@steaminfo.state_message%></dd>
