@@ -61,6 +61,9 @@ class UserController < ApplicationController
     require 'steam-condenser'
     begin
       @steaminfo = SteamId.new(params[:id].to_i)
+      if @steaminfo.fetch.to_i + 60 * 5 < Time.now.to_i then
+        @steaminfo.fetch
+      end
     rescue SteamCondenserError
       @steaminfo = SteamIdDummy.new(params[:id].to_i);
     end
