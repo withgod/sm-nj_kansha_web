@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   def search
-    @nicks = NjSteamNickname.where('nickname like ?', "%#{params[:q]}%")
+    @nicks = NjSteamNickname.where('nickname like ?', "%#{params[:q]}%").order(:nickname)
   end
   def index
   #  @ranking= NjSteamid.find(:all,
