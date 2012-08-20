@@ -61,7 +61,8 @@ class UserController < ApplicationController
     require 'steam-condenser'
     begin
       @steaminfo = SteamId.new(params[:id].to_i)
-      if @steaminfo.fetch.to_i + 60 * 5 < Time.now.to_i then
+      if Rails.env.development? ||
+        @steaminfo.fetch.to_i + 60 * 5 < Time.now.to_i then
         @steaminfo.fetch
       end
     rescue SteamCondenserError
@@ -74,6 +75,9 @@ class SteamIdDummy
   def initialize(id)
     @id = id
   end
+  def dummy
+    return true;
+  end
   def full_avatar_url
     return 'http://media.steampowered.com/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'
   end
@@ -82,6 +86,12 @@ class SteamIdDummy
   end
   def nickname
     return ''
+  end
+  def member_since
+    return '0000-00-00 00:00:00'
+  end
+  def limited?
+    return true
   end
   def head_line
     return ''

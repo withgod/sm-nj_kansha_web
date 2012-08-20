@@ -45,7 +45,7 @@
             </form>
             <ul class="nav pull-right">
               <% if current_user %>
-                <li><a href="/user/<%= current_user[:steamid]%>"><%=raw current_user[:steaminfo].nickname%></a></li>
+                <li><a href="/user/<%= current_user[:steamid]%>"><%=raw current_user[:nickname]%></a></li>
                 <li class="divider-vertical"></li>
               <li><%= link_to "Sign Out", signout_path %></li>
 

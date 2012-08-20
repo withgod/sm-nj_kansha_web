@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     steamid_url = auth.uid
     steamid = steamid_url.split('/')[5]
     steaminfo = SteamId.new(steamid.to_i)
-    info = {:steamid_url => steamid_url, :steamid => steamid, :steaminfo => steaminfo}
+    info = {:steamid_url => steamid_url, :steamid => steamid, :nickname => steaminfo.nickname}
 
     session[:user_info] = info
     redirect_to root_url, :notice => "Signed in!"

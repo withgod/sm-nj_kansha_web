@@ -15,12 +15,17 @@
     <div class="span4">
       <div class="row">
         <div class="span8">
+          <strong><%=@user.last_nick%> <%= '('+  @steaminfo.nickname + ')' if @user.last_nick != @steaminfo.nickname%></strong>
           <% if @steaminfo.is_online? %>
             <span class="label label-success">online</span>
-        <% else %>
+          <% else %>
             <span class="label label-inverse">offline</span>
-        <% end %>
-          <strong><%=@user.last_nick%> <%= '('+  @steaminfo.nickname + ')' if @user.last_nick != @steaminfo.nickname%></strong>
+          <% end %>
+          <% if @steaminfo.limited? %>
+            <span class="label label-success">basic</span>
+          <% else %>
+            <span class="label label-warning">premium</span>
+          <% end %>
           <a data-target="#nicknames" href="javascript:void(0)" data-toggle="modal">alias</a>
           <br>
           <%= @steaminfo.head_line %>
@@ -28,20 +33,31 @@
         <div class="span8">
           <dl>
             <dt>profile url</dt>
-              <dd><a href="<%= @steaminfo.base_url%>"><%= @steaminfo.base_url%></a></dd>
-            <% if @steaminfo.privacy_state == 'public' %>
-              <dt>state</dt>
+            <dd><a href="<%= @steaminfo.base_url%>"><%= @steaminfo.base_url%></a></dd>
+            <% if @steaminfo.privacy_state == 'public' && !defined?(@steaminfo.dummy) %>
+            <dt>state</dt>
             <dd><%=raw @steaminfo.state_message%></dd>
+            <dt>location</dt>
+            <dd><%=raw @steaminfo.location%></dd>
+            <dt>member_since</dt>
+            <dd><%=raw @steaminfo.member_since.to_s.split(' ')[0];%></dd>
             <dt>summary</dt>
             <dd>
             <blockquote>
-            <%= raw @steaminfo.summary%>
+              <%= raw @steaminfo.summary%>
             </blockquote>
             </dd>
             <% if @steaminfo.links %>
               <dt>links</dt>
             <% @steaminfo.links.each do |k, v| %>
               <dd><a href="<%=v%>"><%=k%></a></dd>
+            <% end %>
+            <% if @steaminfo.most_played_games%>
+              <dt>game play summary</dt>
+              <dd>total: <%=@steaminfo.hours_played%></dd>
+            <% @steaminfo.most_played_games.each do |k, v| %>
+              <dd><%=k%> : <%=v%> hours</dd>
+            <% end %>
           <% end %>
           <% end %>
           <% end %>
