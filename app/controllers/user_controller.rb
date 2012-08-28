@@ -1,15 +1,9 @@
 class UserController < ApplicationController
+  require 'steam-condenser'
   def search
     @nicks = NjSteamNickname.where('nickname like ?', "%#{params[:q]}%").order(:nickname)
   end
   def index
-  #  @ranking= NjSteamid.find(:all,
-  #                           :select => 'nj_steamids.*, sum(nj_kansha_results.jump_count) as jump_count',
-  #                           :joins => 'left join nj_kansha_results on nj_kansha_results.nj_steamid_id = nj_steamids.id',
-  #                           :group => 'nj_steamids.id',
-  #                           :order => "jump_count desc",
-  #                           :conditions => 'jump_count > 0'
-  #                          )
     @rank_start = 0;
     if params[:page].to_i > 1 then
       @rank_start = (params[:page].to_i - 1 )* 50
@@ -18,6 +12,8 @@ class UserController < ApplicationController
     @ranking_demo     = NjSteamid.ranking_scope_demo.page(params[:page])
     @ranking_sol      = NjSteamid.ranking_scope_sol.page(params[:page])
     @ranking_starters = NjSteamid.ranking_scope_starters.page(params[:page])
+
+    @infoc            = SteamId.class_variable_get(:@@cache)
   end
 
   def recent_20_activity
@@ -58,7 +54,6 @@ class UserController < ApplicationController
   end
 
   def detail
-    require 'steam-condenser'
     begin
       @steaminfo = SteamId.new(params[:id].to_i)
       if Rails.env.development? ||

@@ -1,30 +1,37 @@
 <div class="span12">
-<h2 id="<%=title%>_rank"><%=title%> jump ranking </h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th rowspan="2">rank</th>
-      <th colspan="2">jump count</th>
-      <th rowspan="2">nickname</th>
-      <th rowspan="2">last map</th>
-      <th rowspan="2">last challenge</th>
+  <h2 id="<%=title%>_rank"><%=title%> jump ranking </h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th rowspan="2">rank</th>
+        <th colspan="2">jump count</th>
+        <th rowspan="2">nickname</th>
+        <th rowspan="2">last map</th>
+        <th rowspan="2">last challenge</th>
+      </tr>
+      <tr>
+        <th>jump</th>
+        <th>challenge</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% result.each_with_index do|user, i| %>
+      <tr>
+      <td><%=@rank_start + i + 1%></td>
+      <td><%=user.jump_count.to_i%></td>
+      <td><%=user.total_challenge%></td>
+      <td>
+        <% if @infoc[user.steamcomid]%>
+          <img src="<%= @infoc[user.steamcomid].icon_url%>" style="width: 20px;height 20px;">
+      <% else %>
+          <div style="width:20px; height: 20px; background-color: dimgray; float: left">&nbsp;</div>
+      <% end %>
+        <a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a>
+      </td>
+      <td><a href="/map/ranking/<%=user.results.last.mapname%>/1"><%=user.results.last.mapname%></a></td>
+      <td><%=user.results.last.created%></td>
     </tr>
-    <tr>
-      <th>jump</th>
-      <th>challenge</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% result.each_with_index do|user, i| %>
-    <tr>
-    <td><%=@rank_start + i + 1%></td>
-    <td><%=user.jump_count.to_i%></td>
-    <td><%=user.total_challenge%></td>
-    <td><a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a></td>
-    <td><a href="/map/ranking/<%=user.results.last.mapname%>/1"><%=user.results.last.mapname%></a></td>
-    <td><%=user.results.last.created%></td>
-  </tr>
   <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 </div>
