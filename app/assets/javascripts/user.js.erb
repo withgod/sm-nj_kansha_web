@@ -11,6 +11,9 @@ $(function(){
       var lg = new html5jp.graph.line("graph1");
       lg.draw([_data], {x: _xlabel});
     });
+    twttr.anywhere(function (T) {
+      T.hovercards();
+    });
   }
 });
 

@@ -21,12 +21,13 @@
       <td><%=user.jump_count.to_i%></td>
       <td><%=user.total_challenge%></td>
       <td>
-        <% if @infoc[user.steamcomid]%>
-          <img src="<%= @infoc[user.steamcomid].icon_url%>" style="width: 20px;height 20px;">
-      <% else %>
-          <div style="width:20px; height: 20px; background-color: dimgray; float: left">&nbsp;</div>
-      <% end %>
-        <a href="/user/<%= user.steamcomid%>"><%= user.last_nick%></a>
+        <a href="/user/<%= user.steamcomid%>">
+          <% if @infoc[user.steamcomid]%>
+            <img src="<%= @infoc[user.steamcomid].icon_url%>" style="width: 20px;height 20px;border: none" />
+        <% else %>
+            <div style="width:20px; height: 20px; background-color: dimgray; float: left">&nbsp;</div>
+        <% end %>
+          <%= user.last_nick%></a>
       </td>
       <td><a href="/map/ranking/<%=user.results.last.mapname%>/1"><%=user.results.last.mapname%></a></td>
       <td><%=user.results.last.created%></td>

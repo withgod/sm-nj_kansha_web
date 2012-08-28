@@ -49,9 +49,15 @@
             </dd>
             <% if @steaminfo.links %>
               <dt>links</dt>
-            <% @steaminfo.links.each do |k, v| %>
-              <dd><a href="<%=v%>"><%=k%></a></dd>
+              <% @steaminfo.links.each do |k, v| %>
+                <% if v.match('https?://twitter.com/(#!/)?(\w+)') %>
+                <dd>@<%=$2%></dd>
+              <% else %>
+                <dd><a href="<%=v%>"><%=k%></a></dd>
             <% end %>
+            <% end %>
+            <dt>steam rating</dt>
+            <dd><%=raw @steaminfo.steam_rating%></dd>
             <% if @steaminfo.most_played_games%>
               <dt>game play summary</dt>
               <dd>total: <%=@steaminfo.hours_played%></dd>
