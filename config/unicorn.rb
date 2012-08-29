@@ -2,14 +2,14 @@ worker_processes 2
 preload_app true
 timeout 30
 
-#listen "0.0.0.0:8088"
+listen "0.0.0.0:3010"
 
 working_directory File.dirname(__FILE__) + '/../'
 
 pid         "tmp/pids/unicorn.pid"
 stderr_path "log/unicorn.stdout.log"
 stdout_path "log/unicorn.stderr.log"
-listen      '/tmp/unicorn_kansha.sock'
+#listen      '/tmp/unicorn_kansha.sock'
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
