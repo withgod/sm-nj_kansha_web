@@ -23,9 +23,9 @@
       <td>
         <a href="/user/<%= user.steamcomid%>">
           <% if @infoc[user.steamcomid]%>
-            <img src="<%= @infoc[user.steamcomid].icon_url%>" style="width: 20px;height 20px;border: none" />
+            <img src="<%= @infoc[user.steamcomid].icon_url%>" class="avator_icon" />
         <% else %>
-            <div style="width:20px; height: 20px; background-color: dimgray; float: left">&nbsp;</div>
+            <div class="avator_icon_dummy">&nbsp;</div>
         <% end %>
           <%= user.last_nick%></a>
       </td>

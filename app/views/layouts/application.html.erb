@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="http://platform.twitter.com/anywhere.js?id=YVSlHn7sKoHMb5ad5Q0Pg&v=1" type="text/javascript"></script>
     <title><%= content_for?(:title) ? yield(:title) : "SmNjKanshaWeb" %></title>
     <%= csrf_meta_tags %>
 
@@ -14,6 +13,7 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <script src="http://platform.twitter.com/anywhere.js?id=YVSlHn7sKoHMb5ad5Q0Pg&v=1" type="text/javascript"></script>
 
   <% if Rails.env.production? %>
   <!-- for fps.withgod.jp -->
@@ -52,7 +52,7 @@
 
             <% else %>
                 <li>
-              <%= link_to image_tag("http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png", {:border => '0', :alt => 'login'}), "/auth/open_id?openid_url=http://steamcommunity.com/openid" %>
+                <%= link_to image_tag("/img/sits_small.png", {:width => '154', :height => '23', :border => '0', :alt => 'login'}), "/auth/open_id?openid_url=http://steamcommunity.com/openid" %>
               </li>
             <% end %>
             </ul>
