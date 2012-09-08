@@ -1,4 +1,6 @@
 SmNjKanshaWeb::Application.routes.draw do
+  get "motd/index"
+
   get "top/index"
 
   get "map/index"
