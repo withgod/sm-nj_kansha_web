@@ -12,6 +12,7 @@ SmNjKanshaWeb::Application.routes.draw do
   match "user/index/:page" => "user#index", :defaults => { :page=> 1 }
   match 'user/:id' => 'user#detail'
   match 'user/:id/recent_20_activity' => 'user#recent_20_activity'
+  match 'user/:id/most_20_played'  => 'user#most_played_map20'
   match 'user/rank/:type/:page' => 'user#rank', :defaults => {:type => 'all', :page => 1}
 
   match "/auth/:provider/callback" => "sessions#create"

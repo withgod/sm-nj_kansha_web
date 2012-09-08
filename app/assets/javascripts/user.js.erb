@@ -1,6 +1,19 @@
 $(function(){
   var _uid = window.location.href.split('/')[4];
   if (_uid != undefined && _uid.match(/^\d+$/)) {
+
+    $.get('/user/' + _uid + '/most_20_played.json', function(data) {
+      var _content = "<ol>";
+      for (var i = 0; i < data.length; i++) {
+        var x = data[i];
+        _content += '<li>';
+        _content += '<a href="/map/ranking/' + x['nj_map']['mapname'] + '/1">' + x['nj_map']['mapname'] + '</a>. ';
+        _content += x['cnt'] + ' challenge. ' + x['jump_total'] + ' jump.</li>' ;
+      }
+      _content += '</ol>';
+      _content = _content.replace(/\.0/g, '');
+      $('#most_20_box').html(_content);
+    });
     $.get('/user/' + _uid + '/recent_20_activity.json', function(data) {
       var _data   = new Array("count");
       var _xlabel = new Array("day");

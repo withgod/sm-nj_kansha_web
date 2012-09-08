@@ -9,6 +9,15 @@ class NjKanshaResult < ActiveRecord::Base
     select('date(nj_kansha_results.created_at) as created_at, sum(jump_count) as cnt')
     .group('date(nj_kansha_results.created_at)')
     .order('created_at desc')
+  scope :map_count,
+    select('nj_map_id, count(nj_map_id) as cnt')
+    .group('nj_map_id')
+    .order('cnt desc')
+#    .includes(:nj_map_id => :nj_map);
+    #select('nj_map_id, count(nj_kansha_results.nj_map_id) as cnt')
+    #.joins('left join nj_maps on nj_kansha_results.nj_map_id = nj_maps.id')
+    #.group('nj_kansha_results.nj_map_id')
+    #.order('cnt desc')
 
   def mapname
     return self.nj_map.mapname

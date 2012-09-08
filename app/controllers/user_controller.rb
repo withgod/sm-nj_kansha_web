@@ -24,6 +24,15 @@ class UserController < ApplicationController
     end
   end
 
+  def most_played_map20
+    @result =  NjSteamid.find_by_steamcomid(params[:id]).results
+                .all(:select => 'nj_map_id, count(id) as cnt, sum(jump_count) as jump_total', :group => 'nj_map_id', :order => 'cnt desc', :limit => 20)
+
+    respond_to do |format|
+      format.json {render :json => @result, :include => {:nj_map => {:only => [:mapname, :id]}}}
+    end
+  end
+
   def rank
     @rank_start = 0;
     if params[:page].to_i > 1 then
