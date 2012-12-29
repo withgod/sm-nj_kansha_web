@@ -63,13 +63,14 @@ class UserController < ApplicationController
   end
 
   def detail
+    require 'pp'
     begin
       @steaminfo = SteamId.new(params[:id].to_i)
       if Rails.env.development? ||
         @steaminfo.fetch.to_i + 60 * 5 < Time.now.to_i then
         @steaminfo.fetch
       end
-    rescue SteamCondenserError
+    rescue SteamCondenserError => e
       @steaminfo = SteamIdDummy.new(params[:id].to_i);
     end
     @user      = NjSteamid.find_by_steamcomid(params[:id])
