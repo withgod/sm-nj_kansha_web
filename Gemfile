@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.13'
+gem 'bzip2-ruby', '0.2.7', :git => 'git://github.com/brianmario/bzip2-ruby.git'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,7 +16,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
+  gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -45,4 +46,5 @@ gem 'omniauth-openid'
 gem 'steam-condenser'
 
 gem "twitter-bootstrap-rails"
+gem "less-rails"
 
