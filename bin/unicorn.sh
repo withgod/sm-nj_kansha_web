@@ -5,5 +5,5 @@ SELF=`readlink -f $0`
 APP_BASE=`dirname $SELF`/..
 
 cd $APP_BASE
-$HOME/.rvm/bin/start_unicorn -D -E production -c $APP_BASE/config/unicorn.rb
+$HOME/.rbenv/shims/unicorn -D -E production -c $APP_BASE/config/unicorn.rb
 
