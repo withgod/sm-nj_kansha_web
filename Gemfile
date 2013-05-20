@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'bzip2-ruby', '0.2.7', :git => 'git://github.com/brianmario/bzip2-ruby.git'
+gem 'bzip2-ruby', :git => 'git://github.com/brianmario/bzip2-ruby.git'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -43,8 +43,10 @@ gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-openid'
 
-gem 'steam-condenser'
+gem "steam-condenser", "~> 1.3.5"
 
 gem "twitter-bootstrap-rails"
 gem "less-rails"
 
+gem "rb-readline"
+gem "pry-rails"
