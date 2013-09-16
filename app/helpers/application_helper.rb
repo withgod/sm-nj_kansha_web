@@ -22,6 +22,9 @@ module ApplicationHelper
       return 0
     end
     _period = jump_period(results)
+    if _period == 0
+        _period = 1
+    end
     return results.sum(:jump_count) / _period
   end
   def jump_period(results)
