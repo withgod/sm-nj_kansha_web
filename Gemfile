@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 gem 'bzip2-ruby', :git => 'git://github.com/brianmario/bzip2-ruby.git'
 
 # Bundle edge Rails instead:
@@ -48,5 +48,5 @@ gem "steam-condenser", "~> 1.3.5"
 gem "twitter-bootstrap-rails"
 gem "less-rails"
 
-gem "rb-readline"
+gem "rb-readline" , '~> 0.4.2'
 gem "pry-rails"
