@@ -45,8 +45,8 @@ gem 'omniauth-openid'
 
 gem "steam-condenser", "~> 1.3.5"
 
-gem "twitter-bootstrap-rails"
 gem "less-rails"
+gem "twitter-bootstrap-rails"
 
 gem "rb-readline" , '~> 0.4.2'
 gem "pry-rails"
