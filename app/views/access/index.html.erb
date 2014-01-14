@@ -1,0 +1,8 @@
+<div class="span12">
+<h1>Access#index</h1>
+<ul>
+    <% @monthly_count.each_with_index do |count, i| %>
+        <li><%=count.ym%> / jump [<%=count.cnt%>] / challenge [<%=count.challenge_count%>] </li>
+    <% end %>
+</ul>
+</div>

@@ -5,6 +5,10 @@ class NjKanshaResult < ActiveRecord::Base
 
   scope :soldier, where('nj_class_id = 3')
   scope :demoman, where('nj_class_id = 4')
+  scope :monthly_count,
+      select('date_format(nj_kansha_results.created_at, "%Y-%m") as ym, sum(jump_count) as cnt, sum(id) as challenge_count')
+      .group('date_format(nj_kansha_results.created_at, "%Y-%m")')
+      .order('ym desc')
   scope :daily_count,
     select('date(nj_kansha_results.created_at) as created_at, sum(jump_count) as cnt')
     .group('date(nj_kansha_results.created_at)')
