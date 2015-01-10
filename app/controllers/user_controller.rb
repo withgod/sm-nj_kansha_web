@@ -17,7 +17,7 @@ class UserController < ApplicationController
   end
 
   def recent_20_activity
-    @result =  NjSteamid.find_by_steamcomid(params[:id]).results.daily_count.limit(20)
+      @result =  NjSteamid.find_all_by_steamcomid(params[:id]).last.results.daily_count.limit(20)
 
     respond_to do |format|
       format.json {render :json => @result.reverse.to_json}
@@ -25,7 +25,7 @@ class UserController < ApplicationController
   end
 
   def most_played_map20
-    @result =  NjSteamid.find_by_steamcomid(params[:id]).results
+      @result =  NjSteamid.find_all_by_steamcomid(params[:id]).last.results
                 .all(:select => 'nj_map_id, count(id) as cnt, sum(jump_count) as jump_total', :group => 'nj_map_id', :order => 'cnt desc', :limit => 20)
 
     respond_to do |format|
@@ -73,7 +73,7 @@ class UserController < ApplicationController
     rescue SteamCondenserError => e
       @steaminfo = SteamIdDummy.new(params[:id].to_i);
     end
-    @user      = NjSteamid.find_by_steamcomid(params[:id])
+    @user      = NjSteamid.find_all_by_steamcomid(params[:id]).last
   end
 end
 class SteamIdDummy
